@@ -2,6 +2,7 @@ package at.tugraz.ist.swe.stopwatch;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.TextView;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,7 +37,14 @@ public class MainActivityEspressoTest {
 	@Test
 	public void testClockTextViewElapsesTime() throws InterruptedException {
 		onView(withId(R.id.bt_start)).perform(click());
+
 		Thread.sleep(100);
 		onView(withId(R.id.tv_clock)).check(matches(not(withText("0:00:00"))));
+
+		TextView textView = activityTestRule.getActivity().findViewById(R.id.tv_clock);
+		String currentElapsedTime = textView.getText().toString();
+
+		Thread.sleep(100);
+		onView(withId(R.id.tv_clock)).check(matches(not(withText(currentElapsedTime))));
 	}
 }

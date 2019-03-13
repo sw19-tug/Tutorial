@@ -12,12 +12,12 @@ import static org.junit.Assert.assertTrue;
 
 public class ClockUnitTest {
 
-
 	Clock clock;
 
 	@Before
 	public void setUp() {
-		clock = new Clock();
+		SystemTimeProvider systemTimeProvider = new MockSystemTimeProvider();
+		clock = new Clock(systemTimeProvider);
 	}
 
 	@Test
