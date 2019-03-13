@@ -31,16 +31,26 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		handler = new Handler(getMainLooper());
+
+
 	}
 
 	private void onStartClicked() {
 		clock.start();
 
+		onClockCallback();
+	}
+
+	private void onClockCallback(){
+
+		clockTextView.setText(clock.getElapsedTimeString());
+
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				clockTextView.setText(clock.getElapsedTimeString());
+				onClockCallback();
 			}
 		}, 50);
 	}
+
 }
